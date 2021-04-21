@@ -5,8 +5,6 @@ ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3', '~> 1.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -29,6 +27,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
@@ -43,10 +42,14 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'pry-rails', '~> 0.3.9'
-  gem 'annotate', '~> 2.7', '>= 2.7.1'
+  gem 'annotate', '~> 3.1', '>= 3.1.1'
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
-  gem 'binding_of_caller', '~> 0.7.2'
+  gem 'binding_of_caller', '~> 1.0'
   gem 'rubocop-rails', '~> 2.9', '>= 2.9.1', require: false
+end
+
+group :production do
+  gem 'pg', '~> 1.2', '>= 1.2.3'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
