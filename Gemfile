@@ -30,6 +30,10 @@ group :development, :test do
   gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
+  gem 'factory_bot_rails', '~> 6.1'
+  gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
+  gem 'faker', '~> 2.17'
 end
 
 group :development do
@@ -46,6 +50,12 @@ group :development do
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
   gem 'binding_of_caller', '~> 1.0'
   gem 'rubocop-rails', '~> 2.9', '>= 2.9.1', require: false
+end
+
+group :test do
+  gem 'shoulda-matchers', '~> 4.5', '>= 4.5.1'
+  gem 'capybara', '~> 3.35', '>= 3.35.3'
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
 end
 
 group :production do
