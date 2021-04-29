@@ -94,3 +94,16 @@ RSpec.configure do |config|
   Kernel.srand config.seed
 =end
 end
+
+# Helper methods for tests
+
+def login(user)
+  valid_params = { email: user.email, password: 'password' }
+  post "/login", params: { session: valid_params }
+  # session[:user_id] = user.id -- does not work 
+  # vide https://gist.github.com/dteoh/99721c0321ccd18286894a962b5ce584
+end
+
+def is_logged_in?(user)
+  session[:user_id] == user.id
+end
