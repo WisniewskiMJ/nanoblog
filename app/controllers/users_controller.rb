@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+before_action :require_not_logged_in, only: [:new, :create]
+before_action :require_logged_in, only: [:show]
+before_action :require_owner || :require_admin , only: [:edit, :update]
+
   def new
     @user = User.new
   end
@@ -6,6 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      login(@user)
       redirect_to user_url(@user)
     else
       render :new

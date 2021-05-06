@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
+  before_action :require_not_logged_in, only: [:new, :create]
+  before_action :require_logged_in, only: [:destroy]
   
   def new
   end
@@ -8,6 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email])
     if user && user.authenticate(params[:session][:password])
       login(user)
+      puts logged_in?
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user_url(user)
     else
