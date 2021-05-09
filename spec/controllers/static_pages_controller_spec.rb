@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "StaticPages", type: :request do
-  describe "GET /home" do
+RSpec.describe StaticPagesController, type: :controller do
+  describe "GET #home" do
     before :each do
-      get "/"
+      get :home
     end
 
     it "returns http success" do
@@ -15,23 +15,23 @@ RSpec.describe "StaticPages", type: :request do
     end
   end
 
-  describe "GET /about" do
+  describe "GET #about" do
     before :each do
-      get "/about"
+      get :about
     end
 
     it "returns http success" do
       expect(response).to have_http_status(:success)
-    end
+    end 
 
     it "renders contact template" do
       expect(response).to render_template(:about)
     end
   end
 
-  describe "GET /contact" do
+  describe "GET #contact" do
     before :each do
-      get "/contact"
+      get :contact
     end
 
     it "returns http success" do

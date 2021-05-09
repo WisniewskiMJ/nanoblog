@@ -49,12 +49,12 @@ class ApplicationController < ActionController::Base
   end
 
   def require_owner
-    @user = User.find_by(params[:id])
-    redirect_to root_url if !logged_in? || @user != current_user 
+    user = User.find_by(id: params[:id])
+    redirect_to root_url if !logged_in? || user != current_user 
   end
   
   def require_admin
-    @user = User.find_by(params[:id])
+    @user = User.find_by(id: params[:id])
     redirect_to root_url if !@user.admin?
   end
 end

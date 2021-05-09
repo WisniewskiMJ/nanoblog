@@ -1,25 +1,33 @@
 require 'rails_helper'
 
-RSpec.describe "Sessions", type: :request do
+RSpec.describe SessionsController, type: :controller do
   let(:user) { FactoryBot.create(:user) }
   
-  describe "GET /login" do
-    before :each do
-      get "/login"
+  describe "GET #new" do
+    let(:action) { :new }
+    it_behaves_like 'an action requiring no logged in user', :new do
+      let(:parameters) { nil }
     end
     it "returns http success" do
+      call_action(action)
       expect(response).to have_http_status(:success)
     end
     it "renders login page" do
+      call_action(action)
       expect(response).to render_template(:new)
     end   
   end
 
-  describe "POST /login" do
+  describe "POST #create" do
+    let(:action) { :create }
+    let(:parameters) { { session: { email: user.email, password: 'password' } } }
+    it_behaves_like 'an action requiring no logged in user', :create do
+      let(:parameters) { { session: { email: user.email, password: 'password' } } }
+    end
     context "with valid params" do
       before :each do
-        valid_params = { email: user.email, password: 'password' }
-        post "/login", params: { session: valid_params }
+        valid_params = { session: { email: user.email, password: 'password' } }
+        call_action(action, valid_params)
       end
       it "returns http status 302" do
         expect(response.status).to eq(302)
@@ -34,8 +42,8 @@ RSpec.describe "Sessions", type: :request do
 
     context "with invalid params" do
       before :each do
-        invalid_params = { email: user.email, password: 'pasword' }
-        post "/login", params: { session: invalid_params }
+        invalid_params = { session: { email: user.email, password: 'pasword' } }
+        call_action(action, invalid_params) 
       end
       it "returns http success" do
         expect(response).to have_http_status(:success)
@@ -49,10 +57,14 @@ RSpec.describe "Sessions", type: :request do
     end
   end
 
-  describe "DELETE /logout" do
+  describe "DELETE #destroy" do
+    let(:action) { :destroy }
+    it_behaves_like 'an action requiring logged in user', :destroy do
+    let(:parameters) { nil }
+    end
     before :each do
       login(user)
-      delete "/logout"
+      call_action(:destroy)
     end
     it "returns http status 302" do
       expect(response.status).to eq(302)
