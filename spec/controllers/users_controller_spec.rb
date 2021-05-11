@@ -91,14 +91,14 @@ RSpec.describe UsersController, type: :controller do
       let(:owner) { FactoryBot.create(:user) }
       let(:parameters) { { id: owner.id} }
       end
-    before :each do
+    it "returns http success" do
       login(user)
       get :edit, params: { id: user.id }
-    end
-    it "returns http success" do
       expect(response).to have_http_status(:success)
     end
     it "renders edit user template" do
+      login(user)
+      get :edit, params: { id: user.id }
       expect(response).to render_template(:edit)
     end
   end
@@ -142,18 +142,18 @@ RSpec.describe UsersController, type: :controller do
 
   describe "DELETE #destroy" do
     let!(:user) { FactoryBot.create(:user) }
-    it_behaves_like 'an action requiring owner logged in', :destroy do
-      let(:owner) { FactoryBot.create(:user) }
-      let(:parameters) { { id: owner.id} }
-    end
-    it_behaves_like 'an action requiring admin logged in', :destroy do
+    it_behaves_like 'an action requiring owner or admin logged in', :destroy do
       let(:parameters) { { id: user.id} }
+      let(:owner) { FactoryBot.create(:user) }
+      let(:owner_parameters) { { id: owner.id} }
     end
     it "returns http status 302" do
+      login(user)
       delete :destroy, params: { id: user.id }
       expect(response.status).to eq(302)
     end
     it "removes user from database" do
+      login(user)
       count = User.count
       delete :destroy, params: { id: user.id }
       expect(User.count).to eq(count - 1)

@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 before_action :require_not_logged_in, only: [:new, :create]
 before_action :require_logged_in, only: [:show]
 before_action :require_owner, only: [:edit, :update]
-before_action :require_owner || :require_admin , only: [:edit, :update]
+before_action :require_owner_or_admin , only: [:destroy]
 
   def new
     @user = User.new
