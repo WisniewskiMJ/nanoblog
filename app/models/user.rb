@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   attr_accessor :remember_token
+  attr_accessor :activation_token
+
+  before_create :generate_activation_digest
 
   has_secure_password
   validates :name, presence: true, length: { in: 2..30 }, uniqueness: true 
@@ -29,4 +32,12 @@ class User < ApplicationRecord
     return false if remember_digest.nil?
     BCrypt::Password.new(remember_digest).is_password?(remember_token)
   end
+
+  private
+
+    def generate_activation_digest
+      self.activation_token = User.generate_token
+      self.activation_digest = User.generate_digest(activation_token)
+    end
+
 end
