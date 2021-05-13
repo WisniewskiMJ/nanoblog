@@ -11,8 +11,9 @@ before_action :require_owner_or_admin , only: [:destroy]
   def create
     @user = User.new(user_params)
     if @user.save
-      login(@user)
-      redirect_to user_url(@user)
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = 'Check your email for account activation message'
+      redirect_to root_url 
     else
       render :new
     end
