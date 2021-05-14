@@ -39,6 +39,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'faker', '~> 2.17'
+  gem 'launchy', '~> 2.5'
 end
 
 group :development do
@@ -55,6 +56,7 @@ group :development do
   gem 'better_errors', '~> 2.9', '>= 2.9.1'
   gem 'binding_of_caller', '~> 1.0'
   gem 'rubocop-rails', '~> 2.9', '>= 2.9.1', require: false
+  gem 'letter_opener', '~> 1.7'
 end
 
 group :test do

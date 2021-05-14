@@ -2,3 +2,5 @@
   Hi #{@user.name},
 %p
   Welcome to Nanoblog. Click this link to activate your account:
+
+= link_to 'Activate account', edit_account_activation_url(@user.activation_token, email: @user.email)
