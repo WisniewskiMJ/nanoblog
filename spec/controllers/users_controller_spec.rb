@@ -34,8 +34,19 @@ RSpec.describe UsersController, type: :controller do
       it "returns http status 302" do
         expect(response.status).to eq(302)
       end
-      it "redirects to new user show page" do
-        expect(response).to redirect_to(user_url(User.find_by(name: 'Valid_user')))
+      it "sends activation email" do
+        logout
+        email_count = ActionMailer::Base.deliveries.count
+        other_valid_params = { name: 'Other_user', email: 'mail@other.user', 
+                            password: 'password', password_confirmation: 'password' }
+        post :create, params: { user: other_valid_params }
+        expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
+      end
+      it "displays activation email info message" do
+        expect(flash[:info]).to eq('Check your email for account activation message')
+      end
+      it "redirects to home page" do
+        expect(response).to redirect_to(root_url)
       end
       it 'adds user to database' do
         logout

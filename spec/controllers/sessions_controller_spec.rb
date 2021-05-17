@@ -25,18 +25,40 @@ RSpec.describe SessionsController, type: :controller do
       let(:parameters) { { session: { email: user.email, password: 'password' } } }
     end
     context "with valid params" do
-      before :each do
-        valid_params = { session: { email: user.email, password: 'password' } }
-        call_action(action, valid_params)
+      context "user account is activated" do
+        before :each do
+          user.update_attribute(:activated, true)
+          valid_params = { session: { email: user.email, password: 'password' } }
+          call_action(action, valid_params)
+        end
+        it "returns http status 302" do
+          expect(response.status).to eq(302)
+        end
+        it "logs user in" do
+          expect(is_logged_in?(user)).to be true
+        end
+        it "redirects to new user show page" do
+          expect(response).to redirect_to(user_url(user))
+        end
       end
-      it "returns http status 302" do
-        expect(response.status).to eq(302)
-      end
-      it "logs user in" do
-        expect(is_logged_in?(user)).to be true
-      end
-      it "redirects to new user show page" do
-        expect(response).to redirect_to(user_url(user))
+
+      context "user account is not activated" do
+         before :each do
+          valid_params = { session: { email: user.email, password: 'password' } }
+          call_action(action, valid_params)
+        end
+        it "returns http status 302" do
+          expect(response.status).to eq(302)
+        end
+        it "does not log user in" do
+          expect(is_logged_in?(user)).not_to be true
+        end
+        it "redirects to home page" do
+          expect(response).to redirect_to(root_url)
+        end
+        it 'displays warning message' do
+          expect(flash[:warning]).to eq('User account not activated. Check your email for activation link')
+        end
       end
     end
 
