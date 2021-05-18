@@ -95,6 +95,7 @@ RSpec.configure do |config|
 =end
 end
 
+
 # Helper methods for tests
 
 def login(user)
