@@ -33,6 +33,15 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+  def activate!
+    self.update_attribute(:activated, true)
+    self.update_attribute(:activated_at, Time.zone.now)
+  end
+
   def set_reset_digest
     self.reset_token = User.generate_token
     update_attribute(:reset_digest, User.generate_digest(reset_token))
