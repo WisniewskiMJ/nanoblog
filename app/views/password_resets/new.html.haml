@@ -1,7 +1,8 @@
 %h1 Password reset
 %p 
   Please enter your email address, and we'll send you link to reset your password:
-= simple_form_for :reset do |f|
+%br
+= simple_form_for :reset, url: password_resets_url do |f|
   = f.input :email
   = f.button :submit, 'Send link'
 %br
