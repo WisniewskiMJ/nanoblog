@@ -1,2 +1,9 @@
-%h1 PasswordResets#new
-%p Find me in app/views/password_resets/new.html.haml
+%h1 Password reset
+%p 
+  Please enter your email address, and we'll send you link to reset your password:
+= simple_form_for :reset do |f|
+  = f.input :email
+  = f.button :submit, 'Send link'
+%br
+%br
+= render 'shared/back_link'
