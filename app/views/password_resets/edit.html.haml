@@ -1,2 +1,11 @@
-%h1 PasswordResets#edit
-%p Find me in app/views/password_resets/edit.html.haml
+%h1 New password
+%p
+  Enter and confirm new password:
+= simple_form_for @user, url: password_reset_url(params[:id]) do |f|
+  = f.input :password
+  = f.input :password_confirmation
+  = hidden_field_tag :email, @user.email
+  = f.button :submit, 'Reset password'
+%br
+%br
+= render 'shared/back_link'

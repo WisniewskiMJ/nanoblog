@@ -3,10 +3,10 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(email: params[:reset][:email])
-    if @user
-      @user.set_reset_digest
-      @user.send_reset_email
+    user = User.find_by(email: params[:reset][:email])
+    if user
+      user.set_reset_digest
+      user.send_reset_email
       flash[:info] = 'Password reset link has been sent'
       redirect_to root_url
     else
@@ -16,8 +16,27 @@ class PasswordResetsController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(email: params[:email])
   end
 
   def update
+    @user = User.find_by(email: params[:email])
+    if @user && @user.authenticated?(:reset, params[:id])
+      if @user.update(reset_params)
+        flash[:success] = 'Your password have been reset'
+        login(@user)
+        redirect_to user_url(@user)
+      else
+        render :edit
+      end
+    else
+      redirect_to root_url
+    end
   end
+
+  private
+
+    def reset_params
+      params.require(:user).permit(:password, :password_confirmation)
+    end
 end
