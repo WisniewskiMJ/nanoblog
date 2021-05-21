@@ -11,19 +11,20 @@ class PasswordResetsController < ApplicationController
       redirect_to root_url
     else
       flash[:danger] = 'This email address could not be found'
-      render 'new'
+      render :new
     end
   end
 
   def edit
     @user = User.find_by(email: params[:email])
+    redirect_to root_url unless @user
   end
 
   def update
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticated?(:reset, params[:id])
       if @user.update(reset_params)
-        flash[:success] = 'Your password have been reset'
+        flash[:success] = 'Your password has been reset'
         login(@user)
         redirect_to user_url(@user)
       else
