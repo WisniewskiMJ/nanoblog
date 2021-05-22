@@ -29,13 +29,13 @@ class ApplicationController < ActionController::Base
   end
 
   def remember(user)
-    user.set_remember_token
+    user.set_remember_digest
     cookies.permanent[:remember_token] = user.remember_token
     cookies.permanent.encrypted[:user_id] = user.id
   end
 
   def forget(user)
-    user.delete_remember_token
+    user.delete_remember_digest
     cookies.delete(:user_id)
     cookies.delete(:remember_token)
   end

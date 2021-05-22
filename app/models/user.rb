@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   attr_accessor :remember_token, :activation_token, :reset_token
 
-  before_create :generate_activation_digest
+  before_create :set_activation_digest
 
   has_secure_password
   validates :name, presence: true, length: { in: 2..30 }, uniqueness: true 
@@ -17,12 +17,12 @@ class User < ApplicationRecord
     BCrypt::Password.create(string)
   end
 
-  def set_remember_token
+  def set_remember_digest
     self.remember_token = User.generate_token
     update_attribute(:remember_digest, User.generate_digest(remember_token))
   end
 
-  def delete_remember_token
+  def delete_remember_digest
     self.remember_token = nil
     update_attribute(:remember_digest, nil)
   end
@@ -54,7 +54,7 @@ class User < ApplicationRecord
 
   private
 
-    def generate_activation_digest
+    def set_activation_digest
       self.activation_token = User.generate_token
       self.activation_digest = User.generate_digest(activation_token)
     end
