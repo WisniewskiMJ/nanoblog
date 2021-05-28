@@ -9,6 +9,9 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 8 }
   validates :password_confirmation, presence: true
 
+  has_many :posts,
+           dependent: :destroy
+
   def self.generate_token
     SecureRandom.urlsafe_base64
   end
