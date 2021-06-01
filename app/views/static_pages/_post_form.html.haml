@@ -1,0 +1,9 @@
+%h3
+  = @current_user.name
+
+= simple_form_for post do |f|
+  = f.input :content
+  = f.button :submit, 'Share'
+%br
+%br
+= render 'shared/logout_link'
