@@ -21,6 +21,7 @@ before_action :require_owner_or_admin , only: [:destroy]
 
   def show
     @user = User.find_by(id: params[:id])
+    @posts = @user.posts
   end
 
   def edit

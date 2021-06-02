@@ -1,7 +1,9 @@
 - if logged_in?
   = render 'post_form', post: @post
+  = render @feed_items
 - else
   = render 'welcome'
 
+= render 'shared/logout_link'
 = link_to 'About', about_url
 = link_to 'Contact', contact_url

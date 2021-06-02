@@ -1,0 +1,5 @@
+%p #{ post.user.name } says:
+%p #{ post.content }
+%p
+  Posted #{ time_ago_in_words(post.created_at) } ago
+%br

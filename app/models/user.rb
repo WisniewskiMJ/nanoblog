@@ -78,6 +78,10 @@ class User < ApplicationRecord
      UserMailer.password_reset(self).deliver_now
   end
 
+  def feed
+    Post.all
+  end
+
   private
 
     def set_activation_digest
