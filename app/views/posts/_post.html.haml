@@ -2,4 +2,5 @@
 %p #{ post.content }
 %p
   Posted #{ time_ago_in_words(post.created_at) } ago
+= render 'posts/post_delete_link', post: post if post.user == current_user
 %br
