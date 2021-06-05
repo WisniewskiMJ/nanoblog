@@ -1,0 +1,11 @@
+- if logged_in?
+  - content_for :columns do
+    .row
+      .col-md-2.nav
+        %h1 Nav
+      .col-md-7
+        = yield
+      .col-md-3
+        %h1 Other
+
+= render template: "layouts/application"

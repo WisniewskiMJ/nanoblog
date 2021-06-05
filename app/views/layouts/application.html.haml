@@ -10,4 +10,6 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
   %body
     .container
-      = yield
+      = content_for?(:columns) ? yield(:columns) : yield
+
+

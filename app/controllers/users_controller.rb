@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+layout 'columns'
+
 before_action :require_not_logged_in, only: [:new, :create]
 before_action :require_logged_in, only: [:show]
 before_action :require_owner, only: [:edit, :update]
