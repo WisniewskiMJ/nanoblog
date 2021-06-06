@@ -27,7 +27,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'haml', '~> 5.2', '>= 5.2.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
 gem 'simple_form', '~> 5.1'
 

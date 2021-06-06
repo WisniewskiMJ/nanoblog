@@ -1,10 +1,14 @@
 - if logged_in?
   - content_for :columns do
-    .row
-      .col-md-2.nav
-        %h1 Nav
-      .col-md-7
-        = yield
+    .row.full-height
+      .col-md-2
+        = render 'shared/navi'
+      .col-md-7.full-height.d-flex.flex-column 
+        .card
+          .card-body.p-2.pb-1
+            %h3 Title
+        .full-width.hide-scrollbar
+          = yield
       .col-md-3
         %h1 Other
 

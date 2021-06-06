@@ -1,0 +1,19 @@
+@import 'bootstrap';
+
+.full-height {
+  height: 100vh;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.hide-scrollbar {
+    overflow: auto;
+    -ms-overflow-style: none; /* IE 11 */
+    scrollbar-width: none; /* Firefox 64 */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
