@@ -1,15 +1,16 @@
 - if logged_in?
   - content_for :columns do
-    .row.full-height
-      .col-md-2
-        = render 'shared/navi'
-      .col-md-7.full-height.d-flex.flex-column 
-        .card
-          .card-body.p-2.pb-1
-            %h3 Title
-        .full-width.hide-scrollbar
-          = yield
-      .col-md-3
-        %h1 Other
+    .container
+      .row.full-height
+        .col-md-2
+          = render 'shared/navi'
+        .col-md-7.full-height.d-flex.flex-column 
+          .card
+            .card-body.fs-4.fw-bold.p-2.pb-1
+              = yield(:title)
+          .full-width.hide-scrollbar.border
+            = yield
+        .col-md-3
+          %h1 Other
 
 = render template: "layouts/application"

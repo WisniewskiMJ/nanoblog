@@ -1,14 +1,15 @@
-%h1 Welcome to Nanoblog
-= link_to 'Log in', login_url
-%br
-%br
-%br
-%br
-%br
-%p Haven't got an account?
-%h1 Register now
-= link_to 'Sign up', signup_url
-%br
-%br
-%br
-%br
+.container-fluid
+  .row.full-height
+    .col-md-5.front.full-height
+    .col-md-7
+      .full-height.d-flex.flex-column.justify-content-between.align-items-center
+        .p-2.mt-5.d-flex.flex-column.align-items-center
+          %h1.fw-bold Get straight to the point
+          = link_to 'Log in', login_url, class: 'btn btn-secondary btn-lg mt-3'
+        .p-2.d-flex.flex-column.align-items-center
+          %p.fs-5.text-danger Haven't got an account?
+          %h1.fw-bold Register now
+          = link_to 'Sign up', signup_url, class: 'btn btn-secondary btn-lg mt-3'
+        .p-2.nav
+          = link_to 'About', about_url, class: 'nav-link link-secondary'
+          = link_to 'Contact', contact_url, class: 'nav-link link-secondary'

@@ -4,6 +4,14 @@
   height: 100vh;
 }
 
+.half-height {
+  height: 50vh;
+}
+
+.two-fifth-height {
+  height: 40vh;
+}
+
 .full-width {
   width: 100%;
 }
@@ -16,4 +24,37 @@
 
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+.main-link:hover {
+  box-shadow: 0 0 10px 5px rgba(255, 204, 204, 0.3);
+  background-color: rgba(255, 204, 204, 0.3);
+}
+
+.btn:focus,.btn:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+.front {
+  background-image: url("/images/front.jpg");
+  background-size: cover;
+}
+
+.turn-red:hover {
+  background-color: red;
+  color: white;
+  border-color: red;
+}
+
+.post-input-field {
+  border: 0;
+  resize: none;
+  height: 7rem;
+}
+
+.post-input-field:focus,
+.post-input-field:active {
+  outline: none !important;
+  box-shadow: none;
 }

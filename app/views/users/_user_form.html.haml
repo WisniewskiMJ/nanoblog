@@ -1,6 +1,12 @@
-= simple_form_for user do |f|
-  = f.input :name
-  = f.input :email
-  = f.input :password
-  = f.input :password_confirmation
-  = f.button :submit
+.mt-2
+  = simple_form_for user do |f|
+    %div
+      = f.input :name
+    .mt-3
+      = f.input :email
+    .mt-3
+      = f.input :password
+    .mt-3
+      = f.input :password_confirmation
+    .mt-3
+      = f.button :submit, class: 'btn btn-lg btn-secondary mt-3'

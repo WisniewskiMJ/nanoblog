@@ -1,6 +1,13 @@
-%p #{ post.user.name } says:
-%p #{ post.content }
-%p
-  Posted #{ time_ago_in_words(post.created_at) } ago
-= render 'posts/post_delete_link', post: post if post.user == current_user
-%br
+.border-bottom.p-2
+  .row
+    .col-1
+    .col
+      .d-flex.justify-content-between.mb-2
+        .fw-bold
+          = post.user.name
+        .text-secondary 
+          posted #{ time_ago_in_words(post.created_at) } ago
+      = post.content 
+      .d-flex.mt-2
+        .ms-auto
+          = render 'posts/post_delete_link', post: post if post.user == current_user

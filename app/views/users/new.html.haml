@@ -1,5 +1,7 @@
-%h1 Create account
-= render 'user_form', user: @user
-%br
-%br
-= render 'shared/back_link'
+.container.d-flex.flex-column.full-height
+  .mt-3
+    %h1.fw-bold Create account
+  .mt-3
+    = render 'user_form', user: @user
+  .mt-auto.mb-3
+    = render 'shared/back_link'

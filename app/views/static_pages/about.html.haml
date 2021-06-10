@@ -1,9 +1,11 @@
-%h2 About
-%br
-%p 
-  This is mini blogging application, 
-  inspired by #{ link_to 'Ruby on Rails Tutorial', '#' }. 
-  You can see source code #{link_to 'here', '#'}.
-%br
-%br
-= render 'shared/back_link'
+.container.d-flex.flex-column.full-height
+  %h2.fw-bold.mt-4
+    About
+  %p.fs-5.mt-4
+    This is mini blogging application, 
+    inspired by 
+    #{ link_to 'Ruby on Rails Tutorial', '#', class: 'text-danger text-decoration-none' }. 
+    You can see source code 
+    #{link_to 'here', '#', class: 'text-danger text-decoration-none'}.
+  .mt-auto.mb-3
+    = render 'shared/back_link'

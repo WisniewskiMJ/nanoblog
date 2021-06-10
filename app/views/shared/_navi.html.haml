@@ -1,0 +1,11 @@
+.image.p-2
+  = image_tag('/images/nblog_smaller.png', :alt => "cat")
+
+%ul.nav.flex-column.p-2
+  %li.nav-item
+    = link_to 'Home', root_url, class: "#{current_page?(root_url) ? 'link-danger' : 'link-dark'} btn p-1 fs-3 fw-bold main-link"
+  %li.nav-item
+    = link_to 'Profile', user_url(current_user.id), class: "#{current_page?(user_url(current_user.id)) ? 'link-danger' : 'link-dark'} btn p-1 fs-3 fw-bold main-link"
+  %li.nav-item
+    = simple_form_for :session, method: :delete, url: logout_url do |f|
+      = f.button :submit, 'Logout', class: "link-dark btn p-1 fs-3 fw-bold main-link"

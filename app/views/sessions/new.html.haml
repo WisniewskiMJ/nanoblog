@@ -1,10 +1,18 @@
-%h1 Log in
-= simple_form_for :session do |f|
-  = f.input :email
-  = f.input :password
-  = link_to 'Forgot password', new_password_reset_url
-  = f.input :remember_me, as: :boolean 
-  = f.button :submit, 'Log in'
-%br
-%br
-= render 'shared/back_link'
+.container.d-flex.flex-column.full-height
+  .mt-3
+    %h1.fw-bold Log in
+  .mt-4  
+    = simple_form_for :session do |f|
+      %div
+        = f.input :email
+      .mt-3
+        = f.input :password
+      .mt-3.mb-2
+        = f.input :remember_me, as: :boolean
+      .d-flex.justify-content-between.align-items-end.mt-5
+        = f.button :submit, 'Log in', class: 'btn btn-lg btn-secondary me-auto'
+        .me-2.text-danger
+          Forgot password?
+        = link_to 'Reset', new_password_reset_url, class: 'btn btn-lg btn-outline-dark turn-red'
+  .mt-auto.mb-3
+    = render 'shared/back_link'
