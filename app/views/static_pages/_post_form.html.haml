@@ -1,6 +1,7 @@
 .row.border-bottom.p-2
   .col-1
-    = image_tag('/images/cat_default.jpg', size: '50', class: 'rounded-circle')
+    - if post.user.avatar.attached?
+      = image_tag(post.user.avatar, size: '50', class: 'rounded-circle')
   .col
     = simple_form_for post do |f|
       = f.input :content, label: false, placeholder: 'Share what you think', input_html: { class: 'post-input-field fs-5' }

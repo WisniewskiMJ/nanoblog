@@ -1,12 +1,18 @@
-.mt-2
+- if user
+  .m-5
+.m-2
   = simple_form_for user do |f|
     %div
       = f.input :name
     .mt-3
       = f.input :email
+    - if !current_user
+      .mt-3
+        = f.input :password
+      .mt-3
+        = f.input :password_confirmation
     .mt-3
-      = f.input :password
-    .mt-3
-      = f.input :password_confirmation
+      = f.input :avatar
     .mt-3
       = f.button :submit, class: 'btn btn-lg btn-secondary mt-3'
+      

@@ -1,0 +1,9 @@
+.align-self-end.m-3
+  = render 'shared/edit_link'
+.mt-2.ms-4.lh-1
+  .fw-bold.fs-4 
+    = @user.name
+  .text-secondary.fs-5
+    = @user.email
+.mt-2.mb-3.ms-4.text-secondary
+  Joined #{time_tag @user.created_at.to_date}

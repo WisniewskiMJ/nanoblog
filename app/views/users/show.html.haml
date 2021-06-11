@@ -1,18 +1,1 @@
-- provide(:title, @user.name)
-.d-flex.flex-column.two-fifth-height.border-bottom
-  .front.h-50
-  .h-50.position-relative.d-flex.flex-column
-    .position-absolute.top-0.start-0.translate-middle-y.rounded-circle.bg-light.ms-2
-      = image_tag('/images/cat_default.jpg', size: '150', class: 'rounded-circle p-2')
-    .align-self-end.m-3
-      = render 'shared/edit_link'
-    .mt-2.ms-4.lh-1
-      .fw-bold.fs-4 
-        = @user.name
-      .text-secondary.fs-5
-        = @user.email
-    .mt-2.ms-4.text-secondary
-      Joined #{time_tag @user.created_at.to_date}
-- if !@user.posts.empty?      
-  .mb-2.mt-2.border-bottom
-  = render @posts
+= render 'user_panel', action: :show

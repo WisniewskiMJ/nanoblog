@@ -32,9 +32,11 @@ before_action :require_owner_or_admin , only: [:destroy]
 
   def update
     @user = User.find_by(id: params[:id])
+    puts user_params
     if @user.update(user_params)
       redirect_to user_url(@user)
     else
+      puts @user.errors.full_messages.to_sentence
       render :edit
     end
   end
@@ -48,7 +50,7 @@ before_action :require_owner_or_admin , only: [:destroy]
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
     end
   
 end

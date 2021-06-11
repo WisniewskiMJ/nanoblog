@@ -1,9 +1,13 @@
 .border-bottom.p-2
   .row
     .col-1
+      - if post.user.avatar.attached?
+        = image_tag(post.user.avatar, size: '50', class: 'rounded-circle')
+      - else
+        = image_tag('/images/avatar_default.png', size: '50', class: 'rounded-circle')
     .col
       .d-flex.justify-content-between.mb-2
-        .fw-bold
+        .fw-bold.mb-2
           = post.user.name
         .text-secondary 
           posted #{ time_ago_in_words(post.created_at) } ago

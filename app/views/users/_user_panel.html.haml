@@ -1,0 +1,13 @@
+- provide(:title, action == :show ?  @user.name : 'Edit account')
+.d-flex.flex-column.border-bottom
+  .four-one-ratio
+  .position-relative.d-flex.flex-column
+    .position-absolute.top-0.start-0.translate-middle-y.rounded-circle.bg-light.ms-2
+      - if @user.avatar.attached?
+        = image_tag(@user.avatar, size: '150', class: 'rounded-circle p-2')
+      - else
+        = image_tag('/images/avatar_default.png', size: '150', class: 'rounded-circle p-2')
+    = action == :show ? (render 'user_info') : (render 'user_form', user: @user)
+- if !@user.posts.empty? && action == :show    
+  .mb-2.mt-2.border-bottom
+  = render @posts
