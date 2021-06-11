@@ -2,13 +2,13 @@
   .row
     .col-1
       - if post.user.avatar.attached?
-        = image_tag(post.user.avatar, size: '50', class: 'rounded-circle')
+        = link_to image_tag(post.user.avatar, size: '50', class: 'rounded-circle'), user_url(post.user_id)
       - else
-        = image_tag('/images/avatar_default.png', size: '50', class: 'rounded-circle')
+        = link_to image_tag('/images/avatar_default.png', size: '50', class: 'rounded-circle'), user_url(post.user_id)
     .col
       .d-flex.justify-content-between.mb-2
         .fw-bold.mb-2
-          = post.user.name
+          = link_to post.user.name, user_url(post.user_id), class: 'link-dark text-decoration-none'
         .text-secondary 
           posted #{ time_ago_in_words(post.created_at) } ago
       = post.content 

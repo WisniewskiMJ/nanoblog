@@ -1,10 +1,14 @@
-%h1 Password reset
-%p 
-  Please enter your email address, and we'll send you link to reset your password:
-%br
-= simple_form_for :reset, url: password_resets_url do |f|
-  = f.input :email
-  = f.button :submit, 'Send link'
-%br
-%br
-= render 'shared/back_link'
+.container.d-flex.flex-column.full-height
+  .mt-3
+    %h1.fw-bold Password reset
+  .mt-4  
+    %p 
+      Please enter your email address, and we'll send you link to reset your password:
+  .mt-3
+    = simple_form_for :reset, url: password_resets_url do |f|
+      %div
+        = f.input :email
+      .mt-5
+      = f.button :submit, 'Send link', class: 'btn btn-lg btn-secondary'
+  .mt-auto.mb-3
+    = render 'shared/back_link'

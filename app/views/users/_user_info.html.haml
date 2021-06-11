@@ -1,5 +1,8 @@
 .align-self-end.m-3
-  = render 'shared/edit_link'
+  - if @user == current_user
+    = render 'shared/edit_link'
+  - else 
+    =link_to 'Follow', '#', class: 'btn btn-secondary'
 .mt-2.ms-4.lh-1
   .fw-bold.fs-4 
     = @user.name
