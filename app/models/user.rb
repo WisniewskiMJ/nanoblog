@@ -33,6 +33,7 @@ class User < ApplicationRecord
   # validates :password_confirmation, presence: true
 
   has_one_attached :avatar
+  has_one_attached :background_image
 
   has_many :posts,
            dependent: :destroy

@@ -1,6 +1,7 @@
 - provide(:title, action == :show ?  @user.name : 'Edit account')
 .d-flex.flex-column.border-bottom
-  .four-one-ratio
+  .four-one-ratio.position-relative
+    = image_tag(@user.background_image, class: 'position-absolute top-0 cover') if @user.background_image.attached?
   .position-relative.d-flex.flex-column
     .position-absolute.top-0.start-0.translate-middle-y.rounded-circle.bg-light.ms-2
       - if @user.avatar.attached?

@@ -50,7 +50,7 @@ before_action :require_owner_or_admin , only: [:destroy]
   private
 
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar, :background_image)
     end
   
 end
