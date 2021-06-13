@@ -11,10 +11,11 @@
         = f.input :password
       .mt-3
         = f.input :password_confirmation
-    .mt-3
-      = f.input :avatar
-    .mt-3
-      = f.input :background_image
+    -if current_user
+      .mt-3
+        = f.input :avatar, label_html: { class: 'form-label' }, input_html: { class: 'form-control'}
+      .mt-3
+        = f.input :background_image, label_html: { class: 'form-label' }, input_html: { class: 'form-control'}
     .mt-3
       = f.button :submit, class: 'btn btn-lg btn-secondary mt-3'
       
