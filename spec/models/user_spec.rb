@@ -7,8 +7,8 @@
 #  activated_at      :datetime
 #  activation_digest :string
 #  admin             :boolean          default(FALSE)
-#  email             :string
-#  name              :string
+#  email             :string           not null
+#  name              :string           not null
 #  password_digest   :string
 #  remember_digest   :string
 #  reset_digest      :string

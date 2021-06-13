@@ -7,8 +7,8 @@
 #  activated_at      :datetime
 #  activation_digest :string
 #  admin             :boolean          default(FALSE)
-#  email             :string
-#  name              :string
+#  email             :string           not null
+#  name              :string           not null
 #  password_digest   :string
 #  remember_digest   :string
 #  reset_digest      :string
@@ -37,6 +37,24 @@ class User < ApplicationRecord
 
   has_many :posts,
            dependent: :destroy
+
+  has_many :active_relationships,
+           foreign_key: :follower_id,
+           class_name: :Relationship,
+           dependent: :destroy
+
+  has_many :passive_relationships,
+           foreign_key: :followed_id,
+           class_name: :Relationship,
+           dependent: :destroy
+
+  has_many :followers,
+           through: :relationships
+
+  has_many :following,
+           through: :relationships,
+           source: :followed
+
 
   def self.generate_token
     SecureRandom.urlsafe_base64
