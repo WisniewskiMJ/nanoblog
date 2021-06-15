@@ -71,3 +71,7 @@
   outline: none !important;
   box-shadow: none;
 }
+
+.on-top {
+  z-index: 1100;
+}

@@ -47,6 +47,20 @@ before_action :require_owner_or_admin , only: [:destroy]
     redirect_to root_url
   end
 
+  def following
+    @user = User.find_by(id: params[:id])
+    @title = @user.name + ' is following:'
+    @related = @user.following
+    render :show_follow
+  end
+
+  def followers
+    @user = User.find_by(id: params[:id])
+    @title = @user.name + '\'s followers:'
+    @related = @user.followers
+    render :show_follow
+  end
+
   private
 
     def user_params

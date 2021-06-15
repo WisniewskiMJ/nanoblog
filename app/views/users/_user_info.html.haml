@@ -3,13 +3,24 @@
     = render 'shared/edit_link'
   - else 
     -if !current_user.following.include?(@user)
-      = render 'follow_form'
+      = render 'follow_form', user: @user
     - else
-      = render 'unfollow_form'
+      = render 'unfollow_form', user: @user
 .mt-2.ms-4.lh-1
   .fw-bold.fs-4 
     = @user.name
   .text-secondary.fs-5
     = @user.email
-.mt-2.mb-3.ms-4.text-secondary
+.mt-2.ms-4.text-secondary
   Joined #{time_tag @user.created_at.to_date}
+.mt-2.mb-3.d-flex
+  .ms-4.fw-bold
+    = link_to @user.following.count, following_user_url(@user), class: 'link-dark text-decoration-none'
+  .ms-1
+    = link_to 'Following', following_user_url(@user), class: 'link-secondary text-decoration-none'
+  .ms-4.fw-bold
+    = link_to @user.followers.count, following_user_url(@user), class: 'link-dark text-decoration-none'
+  .text-secondary.ms-1
+    = link_to 'Followers', followers_user_url(@user), class: 'link-secondary text-decoration-none'
+
+  

@@ -1,0 +1,17 @@
+.row.border-bottom.p-2.position-relative
+  .col-1
+    - if user.avatar.attached?
+      = image_tag(user.avatar, size: '50', class: 'rounded-circle')
+    - else
+      = image_tag('/images/avatar_default.png', size: '50', class: 'rounded-circle')
+  .col.d-flex.flex-column
+    .ps-1 
+      = link_to user.name, user_url(user.id), class: 'stretched-link link-dark text-decoration-none'
+    .ps-1.text-secondary
+      = user.email
+  - if @user == current_user
+    .col-2.on-top 
+      -if !current_user.following.include?(user)
+        = render 'follow_form', user: user
+      - else
+        = render 'unfollow_form', user: user
