@@ -11,4 +11,3 @@
     = action == :show ? (render 'user_info') : (render 'user_form', user: @user)
 - if !@user.posts.empty? && action == :show    
   .mb-2.mt-2.border-bottom
-  = render @posts
