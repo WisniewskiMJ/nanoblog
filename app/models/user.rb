@@ -49,10 +49,10 @@ class User < ApplicationRecord
            dependent: :destroy
 
   has_many :followers,
-           through: :relationships
+           through: :passive_relationships
 
   has_many :following,
-           through: :relationships,
+           through: :active_relationships,
            source: :followed
 
 

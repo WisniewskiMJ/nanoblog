@@ -2,7 +2,10 @@
   - if @user == current_user
     = render 'shared/edit_link'
   - else 
-    =link_to 'Follow', '#', class: 'btn btn-secondary'
+    -if !current_user.following.include?(@user)
+      = render 'follow_form'
+    - else
+      = render 'unfollow_form'
 .mt-2.ms-4.lh-1
   .fw-bold.fs-4 
     = @user.name
