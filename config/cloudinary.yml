@@ -1,0 +1,7 @@
+production:
+  cloud_name: dapwprthc
+  api_key: ENV['CLOUDINARY_API_KEY']
+  api_secret: ENV['CLOUDINARY_API_SECRET']
+  secure: true
+  enhance_image_tag: true
+  static_file_support: true
