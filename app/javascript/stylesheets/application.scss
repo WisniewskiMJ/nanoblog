@@ -75,3 +75,19 @@
 .on-top {
   z-index: 1100;
 }
+
+.pagination {
+  justify-content: center;
+  margin-bottom: 0;
+}
+
+.page-link {
+  color: rgb(39, 39, 39);
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: grey;
+  border-color: grey;
+}

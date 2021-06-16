@@ -28,6 +28,7 @@ gem 'haml', '~> 5.2', '>= 5.2.1'
 gem 'haml-rails', '~> 2.0', '>= 2.0.1'
 gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
 gem 'simple_form', '~> 5.1'
+gem 'pagy', '~> 3.5'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
