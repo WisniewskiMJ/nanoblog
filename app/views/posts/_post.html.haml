@@ -11,7 +11,7 @@
           = link_to post.user.name, user_url(post.user_id), class: 'link-dark text-decoration-none'
         .text-secondary 
           posted #{ time_ago_in_words(post.created_at) } ago
-      = simple_format(post.content) 
+      = Rinku.auto_link(simple_format(post.content), :all, 'target="_blank"').html_safe
       .d-flex.mt-2
         .ms-auto
           = render 'posts/post_delete_link', post: post if post.user == current_user

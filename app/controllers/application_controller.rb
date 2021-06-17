@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include SessionsHelper
+  include ActionView::Helpers::TextHelper
 
   def require_not_logged_in 
     return if !logged_in?
