@@ -4,7 +4,7 @@ class RelationshipsController < ApplicationController
     @user = User.find_by(id: params[:relationship][:followed_id])
     @relationship = Relationship.new(relationship_params)
     if @relationship.save
-      flash[:success] = 'You are now following this user'
+      flash[:success] = "You are now following #{@user.name}"
       redirect_to user_url(@user)
     else 
       flash[:danger] = 'You did not follow this user'

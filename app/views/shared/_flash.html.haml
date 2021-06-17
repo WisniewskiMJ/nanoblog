@@ -1,0 +1,5 @@
+.position-fixed.vw-100.d-flex.flex-column.on-top
+  - flash.each do |category, message| 
+    %div{ class: "bg-#{category} bg-gradient text-white text-center full-width p-2"}
+      = message
+	
