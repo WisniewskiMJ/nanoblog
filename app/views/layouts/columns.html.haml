@@ -2,9 +2,9 @@
   - content_for :columns do
     .container
       .row.full-height
-        .col-md-2
+        .col-md-2.navbar.navbar-expand-md.navbar-light.bg-light.d-flex.flex-column.justify-content-start.px-0
           = render 'shared/navi'
-        .col-md-7.full-height.d-flex.flex-column 
+        .col-md-7.full-height.d-flex.flex-column
           .card
             .card-body.fs-4.fw-bold.p-2.pb-1
               = yield(:title)
