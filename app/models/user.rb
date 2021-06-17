@@ -106,6 +106,10 @@ class User < ApplicationRecord
                 OR user_id = :user_id", user_id: id)
   end
 
+  def all_posts
+    Post.all
+  end
+
   private
 
     def set_activation_digest

@@ -7,6 +7,11 @@ class StaticPagesController < ApplicationController
     end
   end
 
+  def full
+    @pagy, @all_items = pagy(current_user.all_posts, items: 20)
+    render :layout => 'columns'
+  end
+
   def about
   end
 

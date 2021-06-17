@@ -10,7 +10,7 @@
               = yield(:title)
           .full-width.hide-scrollbar.border
             = yield
-        .col-md-3
-          %h1 Other
+        .col-md-3.p-0
+          = render 'static_pages/right_panel'
 
 = render template: "layouts/application"
