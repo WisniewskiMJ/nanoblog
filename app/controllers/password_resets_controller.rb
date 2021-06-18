@@ -23,12 +23,18 @@ class PasswordResetsController < ApplicationController
   def update
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticated?(:reset, params[:id])
-      if @user.update(reset_params)
-        flash[:success] = 'Your password has been reset'
-        login(@user)
-        redirect_to user_url(@user)
+      if @user.reset_sent_at > (Time.zone.now - 1.hour)
+        if @user.update(reset_params)
+          flash[:success] = 'Your password has been reset'
+          @user.delete_reset_digest
+          login(@user)
+          redirect_to user_url(@user)
+        else
+          render :edit
+        end
       else
-        render :edit
+        flash[:danger] = 'Password reset link has expired'
+        redirect_to login_url
       end
     else
       redirect_to root_url

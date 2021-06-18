@@ -95,6 +95,11 @@ class User < ApplicationRecord
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
+  def delete_reset_digest
+    update_attribute(:reset_digest, nil)
+    update_attribute(:reset_sent_at, nil)
+  end
+
   def send_reset_email
      UserMailer.password_reset(self).deliver_now
   end
