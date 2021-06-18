@@ -1,6 +1,6 @@
 .border-bottom.p-2
   .row
-    .col-2.col-md-1
+    .col-2.col-lg-1
       - if post.user.avatar.attached?
         = link_to image_tag(post.user.avatar, size: '50', class: 'rounded-circle'), user_url(post.user_id)
       - else

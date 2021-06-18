@@ -2,15 +2,15 @@
   - content_for :columns do
     .container
       .row.full-height
-        .col-md-2.navbar.navbar-expand-md.navbar-light.bg-white.d-flex.flex-column.justify-content-start.px-0
+        .col-lg-2.navbar.navbar-expand-lg.navbar-light.bg-white.d-flex.flex-column.justify-content-start.px-0
           = render 'shared/navi'
-        .col-md-7.full-height.d-flex.flex-column
+        .col-lg-7.full-height.d-flex.flex-column
           .card
             .card-body.fs-4.fw-bold.p-2.pb-1
               = yield(:title)
           .full-width.hide-scrollbar.border
             = yield
-        .col-md-3.p-0
+        .col-lg-3.p-0
           = render 'static_pages/right_panel'
 
 = render template: "layouts/application"
