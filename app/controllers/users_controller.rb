@@ -14,8 +14,8 @@ before_action :require_owner_or_admin , only: [:destroy]
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = 'Check your email for account activation message'
-      redirect_to root_url 
+      flash[:info] = 'Account activation email has been sent'
+      redirect_to inactive_user_url(@user)
     else
       render :new
     end
@@ -59,6 +59,18 @@ before_action :require_owner_or_admin , only: [:destroy]
     @title = @user.name + '\'s followers:'
     @related = @user.followers
     render :show_follow
+  end
+
+  def inactive
+    @user = User.find_by(id: params[:id])
+  end
+
+  def resend_activation
+    @user = User.find_by(id: params[:id])
+    @user.new_activation_digest
+    @user.send_activation_email
+    flash[:info] = 'Account activation email has been sent'
+    redirect_to inactive_user_url(@user)
   end
 
   private

@@ -38,7 +38,7 @@ RSpec.describe SessionsController, type: :controller do
           expect(is_logged_in?(user)).to be true
         end
         it "redirects to new user show page" do
-          expect(response).to redirect_to(user_url(user))
+          expect(response).to redirect_to(root_url)
         end
       end
 

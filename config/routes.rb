@@ -8,14 +8,18 @@ Rails.application.routes.draw do
   resources :users, except: [:index, :new] do
     member do
       get :followers, :following
+      get :inactive
+      get :resend_activation
     end
   end
 
+  
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :account_activations, only: [:edit]
+
+  resources :account_activations, only: [:new, :edit]
 
   resources :password_resets, only: [:new, :create, :edit, :update]
 

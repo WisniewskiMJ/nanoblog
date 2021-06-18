@@ -7,7 +7,7 @@ class RelationshipsController < ApplicationController
       flash[:success] = "You are now following #{@user.name}"
       redirect_to user_url(@user)
     else 
-      flash[:danger] = 'You did not follow this user'
+      flash[:danger] = 'You failed to follow user'
       redirect_to user_url(@user)
     end
   end 

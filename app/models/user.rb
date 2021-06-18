@@ -100,6 +100,16 @@ class User < ApplicationRecord
     update_attribute(:reset_sent_at, nil)
   end
 
+  def set_activation_digest
+    self.activation_token = User.generate_token
+    self.activation_digest = User.generate_digest(activation_token)
+  end
+
+  def new_activation_digest
+    self.activation_token = User.generate_token
+    update_attribute(:activation_digest, User.generate_digest(activation_token))
+  end
+  
   def send_reset_email
      UserMailer.password_reset(self).deliver_now
   end
@@ -114,12 +124,5 @@ class User < ApplicationRecord
   def all_posts
     Post.all
   end
-
-  private
-
-    def set_activation_digest
-      self.activation_token = User.generate_token
-      self.activation_digest = User.generate_digest(activation_token)
-    end
 
 end

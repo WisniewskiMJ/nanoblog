@@ -1,0 +1,11 @@
+.container.d-flex.flex-column.full-height
+  %h2.fw-bold.mt-4 
+    Account not active
+  %p.fs-5.mt-4 
+    Hi #{@user.name}! Your account has not been activated yet. Check your email for activation link.
+  .d-flex.justify-content-end.align-items-end.mt-5
+    .me-3.text-danger
+      Didn't get activation link?
+    = link_to 'Send again', resend_activation_user_url(@user), class: 'btn btn-lg btn-outline-dark turn-red'
+  .mt-auto.mb-3
+    = render 'shared/back_link'
