@@ -35,7 +35,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to user_url(@user)
     else
-      puts @user.errors.full_messages.to_sentence
+      flash[:info] = @user.errors.full_messages.to_sentence
       render :edit
     end
   end

@@ -3,10 +3,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.build(post_params)
-    if @post.save
-    else
-      flash[:danger] = @post.errors.full_messages.to_sentence
-    end
+    flash[:danger] = @post.errors.full_messages.to_sentence unless @post.save
     redirect_to root_url
   end
 
