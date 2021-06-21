@@ -25,6 +25,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
+    # subject { FactoryBot.create(:user, name: 'Example', email: 'example@example.com') }
     it { is_expected.to have_secure_password }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_uniqueness_of(:name) }
@@ -36,6 +37,14 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_presence_of(:password) }
     it { is_expected.to validate_length_of(:password).is_at_least(8) }
     it { is_expected.to validate_presence_of(:password_confirmation) }
+  end
+
+  describe 'associations' do
+    it { should have_many(:posts).dependent(:destroy) }
+    it { should have_many(:active_relationships).dependent(:destroy) }
+    it { should have_many(:passive_relationships).dependent(:destroy) }
+    it { should have_many(:followers).through(:passive_relationships) }
+    it { should have_many(:following).through(:active_relationships)  }
   end
 
   describe 'class methods' do

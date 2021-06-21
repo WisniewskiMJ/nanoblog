@@ -20,5 +20,18 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'default scope' do
+    let!(:first_post) { FactoryBot.create(:post) }
+    let!(:second_post) { FactoryBot.create(:post) }
+    it 'orders posts by creation date descending' do
+      posts = []
+      Post.all.each { |post| posts << post }
+      expect(posts).to eq([second_post, first_post])
+    end
+  end
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:user_id) }
+    it { is_expected.to validate_presence_of(:content) }
+    it { is_expected.to validate_length_of(:content).is_at_most(150) }
+  end
 end
