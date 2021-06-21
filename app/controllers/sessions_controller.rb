@@ -1,13 +1,12 @@
 class SessionsController < ApplicationController
-  before_action :require_not_logged_in, only: [:new, :create]
+  before_action :require_not_logged_in, only: %i[new create]
   before_action :require_logged_in, only: [:destroy]
-  
-  def new
-  end
+
+  def new; end
 
   def create
     user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    if user&.authenticate(params[:session][:password])
       if user.activated?
         login(user)
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)

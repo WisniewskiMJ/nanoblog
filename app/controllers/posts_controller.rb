@@ -1,14 +1,13 @@
 class PostsController < ApplicationController
   before_action :require_logged_in
-  
+
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
-      redirect_to root_url
-    else 
-      flash[:danger] =  @post.errors.full_messages.to_sentence
-      redirect_to root_url
+    else
+      flash[:danger] = @post.errors.full_messages.to_sentence
     end
+    redirect_to root_url
   end
 
   def destroy
@@ -16,16 +15,16 @@ class PostsController < ApplicationController
     if @post
       @post.destroy
       flash[:success] = 'Post has been deleted'
-      redirect_to request.referrer || root_url
-    else 
-      flash[:danger] =  'You can not delete this post'
+      redirect_to request.referer || root_url
+    else
+      flash[:danger] = 'You can not delete this post'
       redirect_to root_url
     end
   end
 
   private
 
-    def post_params
-      params.require(:post).permit(:content)
-    end
+  def post_params
+    params.require(:post).permit(:content)
+  end
 end

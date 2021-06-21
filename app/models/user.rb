@@ -27,7 +27,7 @@ class User < ApplicationRecord
   before_create :set_activation_digest
 
   has_secure_password
-  validates :name, presence: true, length: { in: 2..30 }, uniqueness: true 
+  validates :name, presence: true, length: { in: 2..30 }, uniqueness: true
   validates :email, presence: true, uniqueness: true, email: { mode: :strict }
   validates :password, presence: true, length: { minimum: 8 }, on: :create
   validates :password_confirmation, presence: true, on: :create
@@ -55,7 +55,6 @@ class User < ApplicationRecord
            through: :active_relationships,
            source: :followed
 
-
   def self.generate_token
     SecureRandom.urlsafe_base64
   end
@@ -77,6 +76,7 @@ class User < ApplicationRecord
   def authenticated?(action, token)
     digest = send("#{action}_digest") # == self.send()
     return false if digest.nil?
+
     BCrypt::Password.new(digest).is_password?(token)
   end
 
@@ -85,8 +85,8 @@ class User < ApplicationRecord
   end
 
   def activate!
-    self.update_attribute(:activated, true)
-    self.update_attribute(:activated_at, Time.zone.now)
+    update_attribute(:activated, true)
+    update_attribute(:activated_at, Time.zone.now)
   end
 
   def set_reset_digest
@@ -104,16 +104,15 @@ class User < ApplicationRecord
     self.activation_token = User.generate_token
     update_attribute(:activation_digest, User.generate_digest(activation_token))
   end
-  
+
   def send_reset_email
-     UserMailer.password_reset(self).deliver_now
+    UserMailer.password_reset(self).deliver_now
   end
 
   private
 
-    def set_activation_digest
-      self.activation_token = User.generate_token
-      self.activation_digest = User.generate_digest(activation_token)
-    end
-
+  def set_activation_digest
+    self.activation_token = User.generate_token
+    self.activation_digest = User.generate_digest(activation_token)
+  end
 end

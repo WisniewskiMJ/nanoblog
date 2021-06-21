@@ -1,13 +1,12 @@
 module SessionsHelper
-
-  def current_user 
+  def current_user
     # if session[:user_id] exists assign user_id variable to it
     if (user_id = session[:user_id])
       @current_user ||= User.find_by(id: user_id)
     # same as above but with cookies
     elsif (user_id = cookies.encrypted[:user_id])
       user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, cookies[:remember_token])
+      if user&.authenticated?(:remember, cookies[:remember_token])
         login(user)
         @current_user = user
       end

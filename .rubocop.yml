@@ -1,0 +1,26 @@
+require: rubocop-rails
+
+AllCops:
+  Exclude:
+    - Gemfile
+    - Rakefile
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/**/*'
+    - 'lib/**/*'
+    - 'node-modules/**/*'
+    - !ruby/regexp /old_and_unused\.rb$/
+
+Metric/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Style/Documentation:
+    Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Naming/PredicateName:
+  Enabled: false

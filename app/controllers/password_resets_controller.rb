@@ -1,6 +1,5 @@
 class PasswordResetsController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     user = User.find_by(email: params[:reset][:email])
@@ -22,7 +21,7 @@ class PasswordResetsController < ApplicationController
 
   def update
     @user = User.find_by(email: params[:email])
-    if @user && @user.authenticated?(:reset, params[:id])
+    if @user&.authenticated?(:reset, params[:id])
       if @user.reset_sent_at > (Time.zone.now - 1.hour)
         if @user.update(reset_params)
           flash[:success] = 'Your password has been reset'
@@ -43,7 +42,7 @@ class PasswordResetsController < ApplicationController
 
   private
 
-    def reset_params
-      params.require(:user).permit(:password, :password_confirmation)
-    end
+  def reset_params
+    params.require(:user).permit(:password, :password_confirmation)
+  end
 end

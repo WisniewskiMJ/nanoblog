@@ -4,30 +4,27 @@ class RelationshipsController < ApplicationController
   def create
     @followed = User.find_by(id: params[:relationship][:followed_id])
     @relationship = Relationship.new(follower_id: current_user.id, followed_id: @followed.id)
-    if current_user != @followed   
+    if current_user != @followed
       if @relationship.save
         flash[:info] = "You are now following #{@followed.name}"
-        redirect_to user_url(@followed)
-      else 
+      else
         flash[:danger] = @relationship.errors.full_messages.to_sentence
-        redirect_to user_url(@followed)
       end
+      redirect_to user_url(@followed)
     else
       flash[:danger] = 'You can not follow yourself'
       redirect_to root_url
     end
-  end 
+  end
 
   def destroy
     relationship = current_user.active_relationships.find_by(id: params[:id])
     if relationship
       relationship.destroy
       flash[:info] = 'You have unfollowed user'
-      redirect_to root_url
     else
       flash[:danger] = 'You have not been following this user'
-      redirect_to root_url
     end
+    redirect_to root_url
   end
-
 end

@@ -3,7 +3,7 @@ shared_examples_for 'an action requiring logged in user' do |action|
   before :each do
     logout
   end
-  
+
   context 'user is logged in' do
     before do
       login(example_user)
@@ -49,7 +49,6 @@ shared_examples_for 'an action requiring no logged in user' do |action|
     end
   end
 end
-
 
 shared_examples_for 'an action requiring owner logged in' do |action|
   let(:another_user) { FactoryBot.create(:user) }

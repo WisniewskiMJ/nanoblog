@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-  
   describe 'POST#create' do
     let(:user) { FactoryBot.create(:user) }
     it_behaves_like 'an action requiring logged in user', :create do
@@ -14,7 +13,7 @@ RSpec.describe PostsController, type: :controller do
         post :create, params: { post: { content: Faker::Hipster.sentence } }
         expect(Post.all.count).to eq(posts_count + 1)
       end
-      it "redirects to home page" do
+      it 'redirects to home page' do
         login(user)
         post :create, params: { post: { content: Faker::Hipster.sentence } }
         expect(response).to redirect_to(root_url)
@@ -28,7 +27,7 @@ RSpec.describe PostsController, type: :controller do
       it 'displays errors messages' do
         expect(flash[:danger]).not_to be_nil
       end
-      it "redirects to home page" do
+      it 'redirects to home page' do
         expect(response).to redirect_to(root_url)
       end
     end
@@ -55,7 +54,7 @@ RSpec.describe PostsController, type: :controller do
         delete :destroy, params: { id: post.id }
         expect(flash[:success]).to eq('Post has been deleted')
       end
-      it "redirects to home page" do
+      it 'redirects to home page' do
         delete :destroy, params: { id: post.id }
         expect(response).to redirect_to(root_url)
       end
@@ -69,7 +68,7 @@ RSpec.describe PostsController, type: :controller do
       it 'displays warning message' do
         expect(flash[:danger]).to eq('You can not delete this post')
       end
-       it "redirects to home page" do
+      it 'redirects to home page' do
         expect(response).to redirect_to(root_url)
       end
     end

@@ -71,8 +71,8 @@ RSpec.describe User, type: :model do
         expect(user.remember_token).to match(/|S{22,}/)
       end
       it 'sets remember digest with hashed remember token' do
-        expect(BCrypt::Password.new(user.remember_digest).
-               is_password?(user.remember_token)).to be(true)
+        expect(BCrypt::Password.new(user.remember_digest)
+               .is_password?(user.remember_token)).to be(true)
       end
     end
 
@@ -109,7 +109,7 @@ RSpec.describe User, type: :model do
       it 'sends activation email to user' do
         email_count = ActionMailer::Base.deliveries.count
         user.send_activation_email
-        expect(ActionMailer::Base.deliveries.count).to eq(email_count +1)
+        expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
       end
     end
 
@@ -121,7 +121,7 @@ RSpec.describe User, type: :model do
         expect(user.activated?).to be(true)
       end
       it 'marks user activation time' do
-        expect(user.activated_at).to be_within(1.second).of Time.now
+        expect(user.activated_at).to be_within(1.second).of Time.zone.now
       end
     end
 
@@ -133,8 +133,8 @@ RSpec.describe User, type: :model do
         expect(user.reset_token).to match(/|S{22,}/)
       end
       it 'sets reset digest with hashed remember token' do
-        expect(BCrypt::Password.new(user.reset_digest).
-               is_password?(user.reset_token)).to be(true)
+        expect(BCrypt::Password.new(user.reset_digest)
+               .is_password?(user.reset_token)).to be(true)
       end
     end
 
@@ -159,17 +159,17 @@ RSpec.describe User, type: :model do
         expect(user.activation_token).to match(/|S{22,}/)
       end
       it 'sets activation digest with hashed activation token' do
-        expect(BCrypt::Password.new(user.activation_digest).
-               is_password?(user.activation_token)).to be(true)
+        expect(BCrypt::Password.new(user.activation_digest)
+               .is_password?(user.activation_token)).to be(true)
       end
     end
-    
+
     describe '#send_reset_email' do
       it 'sends password reset email to user' do
         email_count = ActionMailer::Base.deliveries.count
         user.set_reset_digest
         user.send_reset_email
-        expect(ActionMailer::Base.deliveries.count).to eq(email_count +1)
+        expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
       end
     end
   end

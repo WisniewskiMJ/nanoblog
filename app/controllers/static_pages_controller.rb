@@ -1,13 +1,13 @@
 class StaticPagesController < ApplicationController
-  layout 'columns', except: [:about, :contact]
+  layout 'columns', except: %i[about contact]
   before_action :require_logged_in, only: [:all_posts]
 
   def home
     if logged_in?
-      @post = current_user.posts.build 
+      @post = current_user.posts.build
       @pagy, @feed_items = pagy(feed(current_user), items: 20)
       render :home
-    else 
+    else
       render :welcome
     end
   end
@@ -16,9 +16,7 @@ class StaticPagesController < ApplicationController
     @pagy, @all_items = pagy(posts_all, items: 20)
   end
 
-  def about
-  end
+  def about; end
 
-  def contact
-  end
+  def contact; end
 end
