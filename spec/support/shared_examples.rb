@@ -10,7 +10,7 @@ shared_examples_for 'an action requiring logged in user' do |action|
       call_action(action, parameters)
     end
     it 'does not display not logged in warning message' do
-      expect(flash[:danger]).not_to eq('You have to be logged in to access that section')
+      expect(flash[:danger]).not_to eq('You have to be logged in to perform this action')
     end
   end
 
@@ -19,7 +19,7 @@ shared_examples_for 'an action requiring logged in user' do |action|
       call_action(action, parameters)
     end
     it 'displays not logged in warning message' do
-      expect(flash[:danger]).to eq('You have to be logged in to access that section')
+      expect(flash[:danger]).to eq('You have to be logged in to perform this action')
     end
   end
 end
@@ -32,7 +32,7 @@ shared_examples_for 'an action requiring no logged in user' do |action|
       call_action(action, parameters)
     end
     it 'does not display logged in warning message' do
-      expect(flash[:danger]).not_to eq('You can not perform that action while logged in')
+      expect(flash[:danger]).not_to eq('You can not perform this action while logged in')
     end
   end
 
@@ -42,7 +42,7 @@ shared_examples_for 'an action requiring no logged in user' do |action|
       call_action(action, parameters)
     end
     it 'displays logged in warning message' do
-      expect(flash[:danger]).to eq('You can not perform that action while logged in')
+      expect(flash[:danger]).to eq('You can not perform this action while logged in')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -60,7 +60,7 @@ shared_examples_for 'an action requiring owner logged in' do |action|
       call_action(action, parameters)
     end
     it 'displays not logged in warning message' do
-      expect(flash[:danger]).to eq('You have to be logged in to access that section')
+      expect(flash[:danger]).to eq('You have to be logged in to perform this action')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -73,7 +73,7 @@ shared_examples_for 'an action requiring owner logged in' do |action|
       call_action(action, parameters)
     end
     it 'displays not an owner logged in warning message' do
-      expect(flash[:danger]).to eq('Only owner of the account can access this section')
+      expect(flash[:danger]).to eq('Only owner of the account can perform this action')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -86,7 +86,7 @@ shared_examples_for 'an action requiring owner logged in' do |action|
       call_action(action, parameters)
     end
     it 'does not display not an owner logged in warning message' do
-      expect(flash[:danger]).not_to eq('Only owner of the account can access this section')
+      expect(flash[:danger]).not_to eq('Only owner of the account can perform this action')
     end
   end
 end
@@ -100,7 +100,7 @@ shared_examples_for 'an action requiring admin logged in' do |action|
       call_action(action, parameters)
     end
     it 'displays not logged in warning message' do
-      expect(flash[:danger]).to eq('You have to be logged in to access that section')
+      expect(flash[:danger]).to eq('You have to be logged in to perform this action')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -113,7 +113,7 @@ shared_examples_for 'an action requiring admin logged in' do |action|
       call_action(action, parameters)
     end
     it 'displays warning message' do
-      expect(flash[:danger]).to eq('You can not perform that action')
+      expect(flash[:danger]).to eq('You can not perform this action')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -127,7 +127,7 @@ shared_examples_for 'an action requiring admin logged in' do |action|
       call_action(action, parameters)
     end
     it 'does not display warning message' do
-      expect(flash[:danger]).not_to eq('You can not perform that action')
+      expect(flash[:danger]).not_to eq('You can not perform this action')
     end
   end
 end
@@ -141,7 +141,7 @@ shared_examples_for 'an action requiring owner or admin logged in' do |action|
       call_action(action, parameters)
     end
     it 'displays not logged in warning message' do
-      expect(flash[:danger]).to eq('You have to be logged in to access that section')
+      expect(flash[:danger]).to eq('You have to be logged in to perform this action')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -154,7 +154,7 @@ shared_examples_for 'an action requiring owner or admin logged in' do |action|
       call_action(action, parameters)
     end
     it 'displays warning message' do
-      expect(flash[:danger]).to eq('Only owner of the account can access this section')
+      expect(flash[:danger]).to eq('Only owner of the account can perform this action')
     end
     it 'redirects to home page' do
       expect(response).to redirect_to(root_url)
@@ -167,7 +167,7 @@ shared_examples_for 'an action requiring owner or admin logged in' do |action|
       call_action(action, owner_parameters)
     end
     it 'does not display warning message' do
-      expect(flash[:danger]).not_to eq('Only owner of the account can access this section')
+      expect(flash[:danger]).not_to eq('Only owner of the account can perform this action')
     end
   end
 
@@ -178,7 +178,7 @@ shared_examples_for 'an action requiring owner or admin logged in' do |action|
       call_action(action, parameters)
     end
     it 'does not display warning message' do
-      expect(flash[:danger]).not_to eq('You can not perform that action')
+      expect(flash[:danger]).not_to eq('You can not perform this action')
     end
   end
 end

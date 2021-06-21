@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :require_logged_in
+  
   def create
     @post = current_user.posts.build(post_params)
     if @post.save
@@ -11,9 +13,14 @@ class PostsController < ApplicationController
 
   def destroy
     @post = current_user.posts.find_by(id: params[:id])
-    @post.destroy
-    flash[:success] = 'Post has been deleted'
-    redirect_to request.referrer || root_url
+    if @post
+      @post.destroy
+      flash[:success] = 'Post has been deleted'
+      redirect_to request.referrer || root_url
+    else 
+      flash[:danger] =  'You can not delete this post'
+      redirect_to root_url
+    end
   end
 
   private

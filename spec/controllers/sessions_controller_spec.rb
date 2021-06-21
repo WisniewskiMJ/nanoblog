@@ -53,11 +53,8 @@ RSpec.describe SessionsController, type: :controller do
         it "does not log user in" do
           expect(is_logged_in?(user)).not_to be true
         end
-        it "redirects to home page" do
-          expect(response).to redirect_to(root_url)
-        end
-        it 'displays warning message' do
-          expect(flash[:warning]).to eq('User account not activated. Check your email for activation link')
+        it "redirects to user inactive page page" do
+          expect(response).to redirect_to(inactive_user_url(user))
         end
       end
     end

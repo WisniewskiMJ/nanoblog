@@ -5,13 +5,13 @@ class ApplicationController < ActionController::Base
 
   def require_not_logged_in 
     return if !logged_in?
-    flash[:danger] = 'You can not perform that action while logged in' 
+    flash[:danger] = 'You can not perform this action while logged in' 
     redirect_to root_url
   end
 
   def require_logged_in
     return if logged_in?
-    flash[:danger] = 'You have to be logged in to access that section' 
+    flash[:danger] = 'You have to be logged in to perform this action' 
     redirect_to root_url 
   end
 
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     else
       user = User.find_by(id: params[:id])
       if user != current_user 
-        flash[:danger] = 'Only owner of the account can access this section'
+        flash[:danger] = 'Only owner of the account can perform this action'
         redirect_to root_url 
       end
     end

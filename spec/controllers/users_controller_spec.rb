@@ -21,7 +21,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "POST #create" do
     let(:action) { :create }
-    it_behaves_like 'an action requiring no logged in user', :new do
+    it_behaves_like 'an action requiring no logged in user', :create do
       let(:parameters) { { user: { name: 'Valid_user', email: 'mail@valid.user', 
                          password: 'password', password_confirmation: 'password' } } }
     end
@@ -43,10 +43,10 @@ RSpec.describe UsersController, type: :controller do
         expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
       end
       it "displays activation email info message" do
-        expect(flash[:info]).to eq('Check your email for account activation message')
+        expect(flash[:info]).to eq('Account activation email has been sent')
       end
-      it "redirects to home page" do
-        expect(response).to redirect_to(root_url)
+      it "redirects to inactive user page" do
+        expect(response).to redirect_to(inactive_user_url(User.find_by(email: 'mail@valid.user').id))
       end
       it 'adds user to database' do
         logout
@@ -168,6 +168,77 @@ RSpec.describe UsersController, type: :controller do
       count = User.count
       delete :destroy, params: { id: user.id }
       expect(User.count).to eq(count - 1)
+    end
+  end
+
+  describe "GET #following" do
+    let(:user) { FactoryBot.create(:user) }
+    it_behaves_like 'an action requiring logged in user', :show do
+      let(:parameters) { { id: user.id } }
+    end
+    before :each do
+      login(user)
+      get :following, params: { id: user.id }
+    end
+    it "returns http status 200" do
+      expect(response.status).to eq(200)
+    end
+    it "renders followed users page" do
+      expect(response).to render_template(:show_follow)
+    end
+  end
+
+  describe "GET #followers" do
+    let(:user) { FactoryBot.create(:user) }
+    it_behaves_like 'an action requiring logged in user', :show do
+      let(:parameters) { { id: user.id } }
+    end
+    before :each do
+      login(user)
+      get :followers, params: { id: user.id }
+    end
+    it "returns http status 200" do
+      expect(response.status).to eq(200)
+    end
+    it "renders followed users page" do
+      expect(response).to render_template(:show_follow)
+    end
+  end
+
+  describe "GET #inactive" do
+    let(:user) { FactoryBot.create(:user) }
+    it_behaves_like 'an action requiring no logged in user', :new do
+      let(:parameters) { nil }
+    end
+    before :each do
+      get :inactive, params: { id: user.id }
+    end
+    it "returns http status 200" do
+      expect(response.status).to eq(200)
+    end
+    it "renders inactive user page" do
+      expect(response).to render_template(:inactive)
+    end
+  end
+
+  describe "GET #resend_activation" do
+    let(:user) { FactoryBot.create(:user) }
+    it_behaves_like 'an action requiring no logged in user', :new do
+      let(:parameters) { nil }
+    end
+    it 'resets activation digest' do
+      activation_digest = user.activation_digest
+      get :resend_activation, params: { id: user.id }
+      expect(user.reload.activation_digest).not_to eq(activation_digest)
+    end
+    it 'sends activation email' do
+      email_count = ActionMailer::Base.deliveries.count
+      get :resend_activation, params: { id: user.id }
+      expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
+    end
+    it "redirects to inactive user page" do
+      get :resend_activation, params: { id: user.id }
+      expect(response).to redirect_to(inactive_user_url(user.id))
     end
   end
 end

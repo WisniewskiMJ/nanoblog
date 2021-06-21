@@ -1,28 +1,33 @@
 class RelationshipsController < ApplicationController
+  before_action :require_logged_in
 
   def create
-    @user = User.find_by(id: params[:relationship][:followed_id])
-    @relationship = Relationship.new(relationship_params)
-    if @relationship.save
-      flash[:success] = "You are now following #{@user.name}"
-      redirect_to user_url(@user)
-    else 
-      flash[:danger] = 'You failed to follow user'
-      redirect_to user_url(@user)
+    @followed = User.find_by(id: params[:relationship][:followed_id])
+    @relationship = Relationship.new(follower_id: current_user.id, followed_id: @followed.id)
+    if current_user != @followed   
+      if @relationship.save
+        flash[:info] = "You are now following #{@followed.name}"
+        redirect_to user_url(@followed)
+      else 
+        flash[:danger] = @relationship.errors.full_messages.to_sentence
+        redirect_to user_url(@followed)
+      end
+    else
+      flash[:danger] = 'You can not follow yourself'
+      redirect_to root_url
     end
   end 
 
   def destroy
-    @relationship = Relationship.find_by(id: params[:id])
-    @relationship.destroy
-    redirect_to root_url
+    relationship = current_user.active_relationships.find_by(id: params[:id])
+    if relationship
+      relationship.destroy
+      flash[:info] = 'You have unfollowed user'
+      redirect_to root_url
+    else
+      flash[:danger] = 'You have not been following this user'
+      redirect_to root_url
+    end
   end
 
-  private
-
-    def relationship_params
-      params.require(:relationship)
-            .permit(:follower_id, :followed_id)
-            .with_defaults(follower_id: current_user.id)
-    end
 end

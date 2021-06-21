@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-layout 'columns'
+layout 'columns', except: [:inactive]
 
-before_action :require_not_logged_in, only: [:new, :create]
-before_action :require_logged_in, only: [:show]
+before_action :require_not_logged_in, only: [:new, :create, :inactive, :resend_activation]
+before_action :require_logged_in, only: [:show, :following, :followers]
 before_action :require_owner, only: [:edit, :update]
 before_action :require_owner_or_admin , only: [:destroy]
 
@@ -32,7 +32,6 @@ before_action :require_owner_or_admin , only: [:destroy]
 
   def update
     @user = User.find_by(id: params[:id])
-    puts user_params
     if @user.update(user_params)
       redirect_to user_url(@user)
     else

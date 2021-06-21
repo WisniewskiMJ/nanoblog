@@ -19,7 +19,7 @@
 #
 FactoryBot.define do
   factory :post do
-    content { "MyText" }
-    user { nil }
+    content { Faker::Hipster.sentence }
+    user_id { Factorybot.create(:user).id }
   end
 end
