@@ -5,7 +5,7 @@ class StaticPagesController < ApplicationController
   def home
     if logged_in?
       @post = current_user.posts.build 
-      @pagy, @feed_items = pagy(current_user.feed, items: 20)
+      @pagy, @feed_items = pagy(feed(current_user), items: 20)
       render :home
     else 
       render :welcome
@@ -13,7 +13,7 @@ class StaticPagesController < ApplicationController
   end
 
   def all_posts
-    @pagy, @all_items = pagy(current_user.all_posts, items: 20)
+    @pagy, @all_items = pagy(posts_all, items: 20)
   end
 
   def about

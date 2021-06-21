@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   include Pagy::Backend
   include SessionsHelper
+  include UsersHelper
   include ActionView::Helpers::TextHelper
 
   def require_not_logged_in 
@@ -36,4 +37,9 @@ class ApplicationController < ActionController::Base
     user = User.find_by(id: params[:id])
     require_owner if !user.admin?
   end
+
+  def posts_all
+    Post.all
+  end
+
 end

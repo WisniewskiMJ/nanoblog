@@ -25,7 +25,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
-    # subject { FactoryBot.create(:user, name: 'Example', email: 'example@example.com') }
+    subject { User.new(name: 'Example', email: 'example@example.com') }
     it { is_expected.to have_secure_password }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_uniqueness_of(:name) }
@@ -135,6 +135,32 @@ RSpec.describe User, type: :model do
       it 'sets reset digest with hashed remember token' do
         expect(BCrypt::Password.new(user.reset_digest).
                is_password?(user.reset_token)).to be(true)
+      end
+    end
+
+    describe '#delete_reset_digest' do
+      before do
+        user.set_reset_digest
+        user.delete_reset_digest
+      end
+      it 'sets reset digest to nil' do
+        expect(user.reset_digest).to be(nil)
+      end
+      it 'sets reset_sent_at to nil' do
+        expect(user.reset_sent_at).to be(nil)
+      end
+    end
+
+    describe '#new_activation_digest' do
+      before do
+        user.new_activation_digest
+      end
+      it 'generates activation token' do
+        expect(user.activation_token).to match(/|S{22,}/)
+      end
+      it 'sets activation digest with hashed activation token' do
+        expect(BCrypt::Password.new(user.activation_digest).
+               is_password?(user.activation_token)).to be(true)
       end
     end
     

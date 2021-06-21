@@ -100,11 +100,6 @@ class User < ApplicationRecord
     update_attribute(:reset_sent_at, nil)
   end
 
-  def set_activation_digest
-    self.activation_token = User.generate_token
-    self.activation_digest = User.generate_digest(activation_token)
-  end
-
   def new_activation_digest
     self.activation_token = User.generate_token
     update_attribute(:activation_digest, User.generate_digest(activation_token))
@@ -114,15 +109,11 @@ class User < ApplicationRecord
      UserMailer.password_reset(self).deliver_now
   end
 
-  def feed
-    following_ids = ("SELECT followed_id FROM relationships
-                     WHERE follower_id = :user_id")
-    Post.where("user_id IN (#{following_ids}) 
-                OR user_id = :user_id", user_id: id)
-  end
+  private
 
-  def all_posts
-    Post.all
-  end
+    def set_activation_digest
+      self.activation_token = User.generate_token
+      self.activation_digest = User.generate_digest(activation_token)
+    end
 
 end
