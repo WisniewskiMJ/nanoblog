@@ -1,6 +1,8 @@
 # NANOBLOG
 Nanoblog is a blog application written with Ruby on Rails, inspired by Michael Hartl's Ruby on Rails Tutorial and Twitter. 
 
+Live version: [Nanoblog](https://stormy-crag-26703.herokuapp.com/)
+
 ### Features:
 - setting up account with email autentication
 - editing account and adding avatar and background images
