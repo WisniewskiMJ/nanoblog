@@ -9,7 +9,7 @@
 #  admin             :boolean          default(FALSE)
 #  email             :string           not null
 #  name              :string           not null
-#  password_digest   :string
+#  password_digest   :string           not null
 #  remember_digest   :string
 #  reset_digest      :string
 #  reset_sent_at     :datetime
