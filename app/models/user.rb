@@ -41,12 +41,14 @@ class User < ApplicationRecord
   has_many :active_relationships,
            foreign_key: :follower_id,
            class_name: :Relationship,
-           dependent: :destroy
+           dependent: :destroy,
+           inverse_of: :follower
 
   has_many :passive_relationships,
            foreign_key: :followed_id,
            class_name: :Relationship,
-           dependent: :destroy
+           dependent: :destroy,
+           inverse_of: :followed
 
   has_many :followers,
            through: :passive_relationships
@@ -85,19 +87,16 @@ class User < ApplicationRecord
   end
 
   def activate!
-    update(activated: true)
-    update(activated_at: Time.zone.now)
+    update(activated: true, activated_at: Time.zone.now)
   end
 
   def set_reset_digest
     self.reset_token = User.generate_token
-    update(reset_digest: User.generate_digest(reset_token))
-    update(reset_sent_at: Time.zone.now)
+    update(reset_digest: User.generate_digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
   def delete_reset_digest
-    update(reset_digest: nil)
-    update(reset_sent_at: nil)
+    update(reset_digest: nil, reset_sent_at: nil)
   end
 
   def new_activation_digest

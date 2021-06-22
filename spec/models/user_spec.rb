@@ -25,7 +25,9 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'validations' do
-    subject { User.new(name: 'Example', email: 'example@example.com') }
+    subject { User.new(name: 'Example', email: 'example@example.com', 
+              password_digest: User.generate_digest(User.generate_token)) }
+   
     it { is_expected.to have_secure_password }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_uniqueness_of(:name) }
@@ -49,13 +51,13 @@ RSpec.describe User, type: :model do
 
   describe 'class methods' do
     let(:user) { FactoryBot.create(:user) }
-    describe '::generate_token' do
+    describe '.generate_token' do
       it 'generates secure random url safe base64 string' do
         expect(User.generate_token).to match(/\S{22,}/)
       end
     end
 
-    describe '::generate_digest' do
+    describe '.generate_digest' do
       it 'hashes given string' do
         string = 'random_string'
         digest = User.generate_digest(string)
