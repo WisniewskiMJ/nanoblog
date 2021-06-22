@@ -1,24 +1,37 @@
-# README
+# NANOBLOG
+Nanoblog is a blog application written with Ruby on Rails, inspired by Michael Hartl's Ruby on Rails Tutorial and Twitter. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Features:
+- setting up account with email autentication
+- editing account and adding avatar and background images
+- resetting password with email link
+- logging in with session and with cookies
+- publishing posts
+- following other users 
 
-Things you may want to cover:
+### Technologies used:
+* Ruby 2.7.2
+* Rails 6.1.3
+* Haml
+* Bootstrap 5
+* SQLite for development and tests
+* PostgreSQL for production
+* RSpec
 
-* Ruby version
+### Integrations
+* Cloudinary for Active Storage
+* Gmail for Action Mailer
 
-* System dependencies
+### Setup
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+To run locally, you have to have Ruby in version 2.7.2  installed on your machine.
+Next you have to execute 
+```
+.bin/setup
+```
+which will install bundler, create and seed database. 
+Then you have to run 
+```
+bundle exec rails server
+```
+and the app will be available at __localhost:3000__ in your browser.
