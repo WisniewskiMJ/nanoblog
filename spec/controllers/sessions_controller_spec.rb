@@ -27,7 +27,7 @@ RSpec.describe SessionsController, type: :controller do
     context 'with valid params' do
       context 'user account is activated' do
         before :each do
-          user.update_attribute(:activated, true)
+          user.update(activated: true)
           valid_params = { session: { email: user.email, password: 'password' } }
           call_action(action, valid_params)
         end

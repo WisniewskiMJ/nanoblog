@@ -65,12 +65,12 @@ class User < ApplicationRecord
 
   def set_remember_digest
     self.remember_token = User.generate_token
-    update_attribute(:remember_digest, User.generate_digest(remember_token))
+    update(remember_digest: User.generate_digest(remember_token))
   end
 
   def delete_remember_digest
     self.remember_token = nil
-    update_attribute(:remember_digest, nil)
+    update(remember_digest: nil)
   end
 
   def authenticated?(action, token)
@@ -85,24 +85,24 @@ class User < ApplicationRecord
   end
 
   def activate!
-    update_attribute(:activated, true)
-    update_attribute(:activated_at, Time.zone.now)
+    update(activated: true)
+    update(activated_at: Time.zone.now)
   end
 
   def set_reset_digest
     self.reset_token = User.generate_token
-    update_attribute(:reset_digest, User.generate_digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
+    update(reset_digest: User.generate_digest(reset_token))
+    update(reset_sent_at: Time.zone.now)
   end
 
   def delete_reset_digest
-    update_attribute(:reset_digest, nil)
-    update_attribute(:reset_sent_at, nil)
+    update(reset_digest: nil)
+    update(reset_sent_at: nil)
   end
 
   def new_activation_digest
     self.activation_token = User.generate_token
-    update_attribute(:activation_digest, User.generate_digest(activation_token))
+    update(activation_digest: User.generate_digest(activation_token))
   end
 
   def send_reset_email

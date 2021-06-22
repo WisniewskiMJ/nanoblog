@@ -121,7 +121,7 @@ shared_examples_for 'an action requiring admin logged in' do |action|
 
   context 'admin user is logged in' do
     before do
-      example_user.toggle!(:admin)
+      example_user.update(admin: true)
       login(example_user)
       call_action(action, parameters)
     end
@@ -172,7 +172,7 @@ shared_examples_for 'an action requiring owner or admin logged in' do |action|
 
   context 'admin user is logged in' do
     before do
-      example_user.toggle!(:admin)
+      example_user.update(admin: true)
       login(example_user)
       call_action(action, parameters)
     end
