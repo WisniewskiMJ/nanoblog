@@ -30,15 +30,15 @@ gem 'email_validator', '~> 2.2', '>= 2.2.2', require: 'email_validator/strict'
 gem 'simple_form', '~> 5.1'
 gem 'pagy', '~> 3.5'
 gem 'rinku', '~> 2.0', '>= 2.0.6', :require => 'rails_rinku'
+gem 'faker', '~> 2.17'
+gem 'factory_bot_rails', '~> 6.1'
 
 group :development, :test do
   gem 'sqlite3', '~> 1.4'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
-  gem 'factory_bot_rails', '~> 6.1'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
-  gem 'faker', '~> 2.17'
   gem 'launchy', '~> 2.5'
 end
 
