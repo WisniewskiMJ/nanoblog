@@ -37,3 +37,11 @@ Then you have to run
 bundle exec rails server
 ```
 and the app will be available at __localhost:3000__ in your browser.
+
+### To do
+
+* Tags
+* Likes
+* JS library to crop images
+* Helpers tests
+* End to end tests
