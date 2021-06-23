@@ -174,5 +174,16 @@ RSpec.describe User, type: :model do
         expect(ActionMailer::Base.deliveries.count).to eq(email_count + 1)
       end
     end
+
+    describe '#feed' do
+      it 'returns users and their following posts' do
+        other_user = FactoryBot.create(:user)
+        own_post = FactoryBot.create(:post, user_id: user.id)
+        user.following << other_user
+        followed_user_post = create(:post, user_id: other_user.id)
+        posts = user.feed
+        expect(posts).to eq([followed_user_post, own_post])
+      end
+    end
   end
 end
