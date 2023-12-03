@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
-  # config.require_master_key = true
+  config.require_master_key = true
 
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -47,7 +47,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Include generic and useful information about system operation, but avoid logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII).
@@ -69,9 +69,9 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
-  host = 'stormy-crag-26703.herokuapp.com'
+  host = 'nanoblog.micckh.dev'
   config.action_mailer.default_url_options = { host: host }
-  config.action_mailer.default_options = {from: 'no-reply@herokuapp.com'}
+  config.action_mailer.default_options = {from: 'no-reply@micckh.dev'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
@@ -80,7 +80,7 @@ Rails.application.configure do
     user_name:            ENV['GMAIL_SMTP_USER'],
     password:             ENV['GMAIL_SMTP_PASSWORD'],
     authentication:       'plain',
-    enable_starttls_auto: true 
+    enable_starttls_auto: true
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

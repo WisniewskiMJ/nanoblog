@@ -1,0 +1,23 @@
+
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password:
+  socket: /tmp/postgresql.sock
+  timeout: 5000
+  host: localhost
+
+development:
+  <<: *default
+  database: nanoblog_development
+
+test:
+  <<: *default
+  database: nanoblog_test
+  host: '127.0.0.1'
+
+production:
+  <<: *default
+  database: nanoblog_production
