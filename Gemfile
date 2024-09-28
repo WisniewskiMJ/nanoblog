@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0', '>= 5.0.1'
   gem 'rails-controller-testing', '~> 1.0', '>= 1.0.5'
   gem 'launchy', '~> 2.5'
+  gem 'sqlite3', '~> 1.4'
 end
 
 group :development do
