@@ -8,6 +8,7 @@ server ENV["SERVER_URL"], port: ENV["SSH_PORT"], roles: %w(web app db), primary:
 set :application,             ENV["APP_NAME"]
 set :repo_url,                "git@github.com:WisniewskiMJ/nanoblog.git"
 set :stage,                   :production
+set :rails_env,               :production
 set :deploy_to,               "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
 set :linked_files, fetch(:linked_files, []).push(
   'config/database.yml', '.env', 'config/puma.rb', 'config/credentials/production.key'
@@ -27,6 +28,7 @@ set :puma_error_log,          "#{release_path}/log/puma.error.log"
 set :puma_preload_app,        true
 set :puma_worker_timeout,     nil
 set :puma_init_active_record, true
+set :puma_enable_socket_service, true
 
 
 # Default branch is :master
@@ -101,14 +103,14 @@ namespace :deploy do
   desc 'Restart application'
     task :restart do
       on roles(:app), in: :sequence, wait: 5 do
-        invoke 'restart'
+        invoke 'puma:restart'
       end
   end
 
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :restart
+  # after  :finishing,    :restart
 end
 
 # ps aux | grep puma    # Get puma pid
