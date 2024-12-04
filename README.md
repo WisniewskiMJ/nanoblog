@@ -1,7 +1,7 @@
 # NANOBLOG
-Nanoblog is a blog application written with Ruby on Rails, inspired by Michael Hartl's Ruby on Rails Tutorial and Twitter. 
+Nanoblog is a blog application written with Ruby on Rails, inspired by Michael Hartl's Ruby on Rails Tutorial and Twitter.
 
-Live version: [Nanoblog](https://stormy-crag-26703.herokuapp.com/)
+Live version: [Nanoblog](https://nanoblog.micckh.dev/)
 
 ### Features:
 - setting up account with email autentication
@@ -9,7 +9,7 @@ Live version: [Nanoblog](https://stormy-crag-26703.herokuapp.com/)
 - resetting password with email link
 - logging in with session and with cookies
 - publishing posts
-- following other users 
+- following other users
 
 ### Technologies used:
 * Ruby 2.7.2
@@ -26,13 +26,13 @@ Live version: [Nanoblog](https://stormy-crag-26703.herokuapp.com/)
 
 ### Setup
 
-To run locally, you have to have Ruby in version 2.7.2  installed on your machine.
-Next you have to execute 
+To run locally, you have to have Ruby v2.7.2, NodeJS v14.21.3 and Yarn v1.22.19 installed on your machine.
+Next you have to execute
 ```
 .bin/setup
 ```
-which will install bundler, create and seed database. 
-Then you have to run 
+which will install bundler, create and seed database.
+Then you have to run
 ```
 bundle exec rails server
 ```
